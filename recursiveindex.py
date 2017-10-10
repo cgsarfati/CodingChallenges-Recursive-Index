@@ -29,19 +29,29 @@ def recursive_index(needle, haystack):
     Do this with recursion. You MAY NOT USE A `for` OR `while` LOOP.
     """
 
-    # target: h
-    # [i, o, h] --> no so +1; [o, h] --> no so +1 [h]; return 0; ultimately 2
+    # need to access index as int as a return value
+    # need a counter for how many recursions we do (dictates next index)
+    # if not found, return None
 
-    # BASE - stop when haystack[0] == needle; when lst empty, means not there. return None
-    if needle == haystack[0]:
-        return 0
+    # store idx as start_at
+    def _recursive_index(needle, haystack, start_at):
 
-    # PROGRESSION
+        # BASE CASES
+        # 1. Check if not found (we've gone too far)
+        if start_at == len(haystack):
+            return None
 
-    if haystack:
-        return 1 + recursive_index(needle, haystack[1:])
+        # 2. Have we found it?
+        if haystack[start_at] == needle:
+            # return idx
+            return start_at
 
-    return None
+        # PROGRESSION
+        # increment idx by 1
+        return _recursive_index(needle, haystack, start_at + 1)
+
+    # start algorithm w/ idx 0
+    return _recursive_index(needle, haystack, 0)
 
 
 if __name__ == '__main__':
