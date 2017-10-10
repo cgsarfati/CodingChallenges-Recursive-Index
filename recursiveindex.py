@@ -29,6 +29,20 @@ def recursive_index(needle, haystack):
     Do this with recursion. You MAY NOT USE A `for` OR `while` LOOP.
     """
 
+    # target: h
+    # [i, o, h] --> no so +1; [o, h] --> no so +1 [h]; return 0; ultimately 2
+
+    # BASE - stop when haystack[0] == needle; when lst empty, means not there. return None
+    if needle == haystack[0]:
+        return 0
+
+    # PROGRESSION
+
+    if haystack:
+        return 1 + recursive_index(needle, haystack[1:])
+
+    return None
+
 
 if __name__ == '__main__':
     import doctest
